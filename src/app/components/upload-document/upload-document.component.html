@@ -1,0 +1,41 @@
+<div class="upload-container">
+  <h2>{{ editingDocument ? 'Editează document' : 'Încărcare document' }}</h2>
+
+  <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Denumirea documentului</label>
+      <input id="name" type="text" formControlName="name" placeholder="Ex: Contract colaborare" />
+    </div>
+
+    <div class="form-group">
+      <label for="description">Descriere</label>
+      <textarea id="description" formControlName="description" placeholder="Descriere scurtă"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="file">Încarcă document</label>
+      <input id="file" type="file" (change)="onFileSelected($event)" />
+      <div class="error" *ngIf="fileError">{{ fileError }}</div>
+    </div>
+
+    <button type="submit" [disabled]="!isFormValid()">
+      {{ editingDocument ? 'Salvează modificări' : 'Încarcă' }}
+    </button>
+  </form>
+</div>
+
+<!-- Lista documentelor -->
+<div class="documents-list" *ngIf="documents.length > 0">
+  <h3>📂 Documente încărcate</h3>
+  <ul>
+    <li *ngFor="let doc of documents">
+      <strong>{{ doc.name }}</strong> ({{ getFileSize(doc.file) }})  
+      <br />
+      <em>{{ doc.description }}</em>
+      <br />
+      <a [href]="doc.url" target="_blank">🔎 Vizualizează</a> | 
+      <button (click)="editDocument(doc)">✏️ Editează</button> | 
+      <button (click)="deleteDocument(doc)">🗑️ Șterge</button>
+    </li>
+  </ul>
+</div>

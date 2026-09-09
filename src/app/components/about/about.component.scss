@@ -1,0 +1,553 @@
+// Base styles and reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: rgba(156, 106, 117, 0.8);
+    min-height: 100vh;
+    width: 100%;
+}
+
+body {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    line-height: 1.6;
+    color: #2d1b1f;
+    background: rgba(156, 106, 117, 0.8);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(156, 106, 117, 0.8);
+        z-index: -1;
+    }
+}
+
+// Container
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+// Section styles
+.fashion-section {
+    padding: 100px 0;
+    position: relative;
+    background: rgba(156, 106, 117, 0.8);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+
+    &:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        pointer-events: none;
+    }
+
+    &:nth-child(even)::before {
+        background: transparent;
+    }
+}
+
+// Layout wrapper
+.layout-wrapper {
+    display: grid;
+    align-items: center;
+    gap: 80px;
+    min-height: 600px;
+}
+
+// Layout variants
+.layout-1 {
+    grid-template-columns: 1fr 1.2fr;
+
+    .main-image {
+        width: 70%;
+        height: 85%;
+        top: 0;
+        right: 0;
+        border-radius: 8px;
+    }
+
+    .small-image {
+        width: 45%;
+        height: 40%;
+        bottom: 0;
+        left: 0;
+        border-radius: 8px;
+        z-index: 2;
+    }
+}
+
+.layout-2 {
+    grid-template-columns: 1.2fr 1fr;
+
+    .large-image {
+        width: 65%;
+        height: 75%;
+        top: 0;
+        left: 0;
+        border-radius: 8px;
+    }
+
+    .overlay-image {
+        width: 50%;
+        height: 50%;
+        bottom: 0;
+        right: 0;
+        border-radius: 8px;
+        z-index: 2;
+    }
+
+    .reverse {
+        transform: none;
+    }
+}
+
+.layout-3 {
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    .hero-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        position: relative;
+    }
+}
+
+// Content area
+.content-area {
+    padding: 40px 0;
+
+    &.centered {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+
+        .description-text {
+            max-width: 500px;
+            margin: 40px auto;
+        }
+    }
+}
+
+// Typography
+.section-tag {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #7b2e3a;
+    margin-bottom: 30px;
+    font-weight: 500;
+    font-family: 'Arial', sans-serif;
+}
+
+.main-title {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 0.9;
+    margin-bottom: 10px;
+    color: #7b2e3a;
+
+    &.italic {
+        font-style: italic;
+        font-weight: 300;
+    }
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 0.9;
+    margin-bottom: 10px;
+    color: #7b2e3a;
+
+    &.italic {
+        font-style: italic;
+        font-weight: 300;
+    }
+}
+
+.description-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(123, 46, 58, 0.8);
+    margin: 40px 0;
+    max-width: 400px;
+    font-family: 'Arial', sans-serif;
+}
+
+// Image area
+.image-area {
+    position: relative;
+    height: 600px;
+
+    &.full-width {
+        height: 400px;
+        margin-top: 60px;
+    }
+}
+
+.image-collage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    &.reverse {
+        transform: scaleX(-1);
+    }
+}
+
+// Updated image placeholder styles for real images
+.image-placeholder {
+    position: absolute;
+    background: linear-gradient(135deg, #7b2e3a, #5c1f28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0; // Hide any fallback text
+    font-weight: 500;
+    border: 3px solid rgba(123, 46, 58, 0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 15px 30px rgba(123, 46, 58, 0.3);
+    }
+
+    // Styles for images
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    // Hide any span text when using images
+    span {
+        display: none;
+    }
+}
+
+// Animations
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Mobile Styles - 768px and below
+@media (max-width: 768px) {
+    html {
+        background: rgba(156, 106, 117, 1);
+        min-height: 100vh;
+        width: 100vw;
+    }
+
+    body {
+        background: rgba(156, 106, 117, 1);
+        min-height: 100vh;
+        width: 100vw;
+
+        &::before {
+            background: rgba(156, 106, 117, 1);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        &::after {
+            content: '';
+            position: fixed;
+            top: -60px;
+            left: -60px;
+            right: -60px;
+            bottom: -60px;
+            background: rgba(156, 106, 117, 1);
+            z-index: -2;
+        }
+    }
+
+    .container {
+        padding: 0 40px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .fashion-section {
+        padding: 120px 0;
+        background: rgba(156, 106, 117, 1);
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding-left: 40px;
+        padding-right: 40px;
+
+        &::before {
+            background: transparent;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: -40px;
+            right: -40px;
+            bottom: -40px;
+            background: rgba(156, 106, 117, 1);
+            z-index: -1;
+        }
+    }
+
+    .layout-wrapper {
+        grid-template-columns: 1fr;
+        gap: 80px;
+        min-height: auto;
+        position: relative;
+    }
+
+    .content-area {
+        position: relative;
+        z-index: 2;
+        background: transparent;
+        padding: 0 20px 0 20px;
+        order: 1;
+        color: #2d1b1f;
+        width: 100%;
+        transform: translateY(-60px);
+
+        &.centered {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            background: transparent;
+            color: #2d1b1f;
+            max-width: 100%;
+            transform: translateY(-60px);
+        }
+    }
+
+    .section-tag {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        color: #7b2e3a;
+    }
+
+    .main-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        margin-bottom: 5px;
+        color: #7b2e3a;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+        margin-bottom: 5px;
+        color: #7b2e3a;
+    }
+
+    .description-text {
+        max-width: 100%;
+        margin: 25px 0;
+        font-size: 1rem;
+        color: rgba(123, 46, 58, 0.8);
+    }
+
+    .image-area {
+        height: 500px;
+        position: relative;
+        z-index: 1;
+        order: 2;
+        margin-top: -30px;
+
+        &.full-width {
+            height: 400px;
+            position: relative;
+            z-index: 1;
+            margin-top: -10px;
+            order: 2;
+        }
+    }
+
+    .image-collage {
+        &.reverse {
+            transform: none;
+        }
+    }
+
+    .image-placeholder {
+        border-width: 2px;
+        font-size: 0;
+
+        img {
+            &:hover {
+                transform: scale(1.02); // Reduced scale on mobile
+            }
+        }
+    }
+
+    .layout-1 {
+        .main-image {
+            width: 70%;
+            height: 85%;
+            top: 0;
+            right: 0;
+            border-radius: 8px;
+        }
+
+        .small-image {
+            width: 45%;
+            height: 40%;
+            bottom: 0;
+            left: 0;
+            border-radius: 8px;
+            z-index: 2;
+        }
+    }
+
+    .layout-2 {
+        .large-image {
+            width: 65%;
+            height: 75%;
+            top: 0;
+            left: 0;
+            border-radius: 8px;
+        }
+
+        .overlay-image {
+            width: 50%;
+            height: 50%;
+            bottom: 0;
+            right: 0;
+            border-radius: 8px;
+            z-index: 2;
+        }
+    }
+
+    .layout-3 {
+        .hero-image {
+            border-radius: 12px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+// Mobile Styles - 480px and below
+@media (max-width: 480px) {
+    body::after {
+        top: -80px;
+        left: -80px;
+        right: -80px;
+        bottom: -80px;
+    }
+
+    .container {
+        padding: 0 30px;
+        width: 100%;
+    }
+
+    .fashion-section {
+        padding: 140px 0;
+        padding-left: 30px;
+        padding-right: 30px;
+
+        &::after {
+            top: -50px;
+            left: -50px;
+            right: -50px;
+            bottom: -50px;
+        }
+    }
+
+    .content-area {
+        padding: 0 15px 0 15px;
+        transform: translateY(-70px);
+
+        &.centered {
+            transform: translateY(-70px);
+        }
+    }
+
+    .main-title {
+        font-size: clamp(2rem, 15vw, 3.5rem);
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 12vw, 3rem);
+    }
+
+    .image-area {
+        height: 400px;
+        margin-top: -40px;
+
+        &.full-width {
+            height: 300px;
+            margin-top: -20px;
+        }
+    }
+
+    .layout-1 {
+        .main-image {
+            width: 70%;
+            height: 80%;
+            top: 5%;
+            right: 0;
+        }
+
+        .small-image {
+            width: 45%;
+            height: 35%;
+            bottom: 5%;
+            left: 0;
+        }
+    }
+
+    .layout-2 {
+        .large-image {
+            width: 65%;
+            height: 70%;
+            top: 5%;
+            left: 0;
+        }
+
+        .overlay-image {
+            width: 50%;
+            height: 45%;
+            bottom: 5%;
+            right: 0;
+        }
+    }
+}

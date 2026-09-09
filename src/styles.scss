@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+html, body, app-root {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #CEB0B2;
+}
+
+.p-toast {
+  top: 20px !important;
+  right: 50% !important;
+  transform: translateX(50%);
+  width: 60% !important;
+  max-width: 700px;
+}
+
+.p-toast-message {
+  font-size: 2rem;
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+}
+
+.p-toast-message-error {
+  background: rgba(228, 71, 73, 0.86);
+  color: white;
+}
+
+.p-toast-message-info {
+  background: #1677ff;
+  color: white;
+}
+
+

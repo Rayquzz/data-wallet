@@ -1,0 +1,125 @@
+.upload-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ceb0b2;
+  border: 2px solid #7b2e3a;
+  border-radius: 12px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 20px;
+    color: #7b2e3a;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+
+    label {
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: block;
+      color: #222;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      color: #222; // ✅ text vizibil
+      background: #fff;
+      transition: border 0.2s ease, background 0.2s ease;
+
+      &:focus {
+        border-color: #7b2e3a;
+        background: #fdfdfd;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .error {
+      margin-top: 5px;
+      font-size: 13px;
+      color: #b50000;
+    }
+  }
+
+  button {
+    background: #7b2e3a;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #5c202a;
+    }
+
+    &:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+  }
+
+  .file-list {
+    margin-top: 25px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #7b2e3a;
+    border-radius: 10px;
+    text-align: left;
+
+    h3 {
+      margin-bottom: 10px;
+      color: #7b2e3a;
+    }
+
+    .file-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+
+      p {
+        margin: 4px 0;
+        color: #222;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+/* 📱 Responsive pentru telefoane */
+@media (max-width: 600px) {
+  .upload-container {
+    padding: 15px;
+    margin: 20px;
+    max-width: 100%;
+
+    h2 {
+      font-size: 20px;
+    }
+
+    button {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+}
+/* Animatie incarcare */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

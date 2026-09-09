@@ -1,0 +1,31 @@
+<div class="pin-container">
+  <div class="top-section">
+    <img src="assets/logo.png" alt="App Logo" class="logo">
+    <h2>{{pinText}}</h2>
+
+    <!-- Open form here -->
+    <form #pinForm="ngForm" (ngSubmit)="submitPin(pinForm)">
+      <!-- PIN dots -->
+      <div class="pin-dots">
+        <span *ngFor="let dot of dots; let i = index" [class.filled]="i < pin.length"></span>
+      </div>
+
+      <!-- Hidden input to connect form -->
+      <input type="hidden" name="pin" ngModel [ngModel]="pin" required pattern="[0-9]{4}">
+
+      <div class="bottom-section">
+        <!-- PIN keypad -->
+        <div class="pin-pad">
+          <button type="button" *ngFor="let num of [1,2,3,4,5,6,7,8,9]"
+                  (click)="addDigit(num, pinForm)">{{num}}</button>
+          <div></div>
+          <button type="button" (click)="addDigit(0, pinForm)">0</button>
+          <button type="button" class="delete-btn" (click)="deleteDigit(pinForm)">⌫</button>
+        </div>
+
+        <!-- Hidden submit (if you want Enter key support) -->
+        <button type="submit" [disabled]="pinForm.invalid" style="display:none;">Unlock</button>
+      </div>
+    </form>
+  </div>
+</div>

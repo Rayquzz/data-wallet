@@ -1,0 +1,85 @@
+<div class="files-container">
+
+  <!-- Search bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search documents..." [(ngModel)]="searchTerm">
+    <button (click)="searchFiles()">🔍</button>
+  </div>
+
+  <!-- FILE FORM -->
+  <div class="file-form-wrapper" *ngIf="showForm">
+    <div class="file-preview">
+      <div class="file-icon">📄</div>
+      <div class="file-name">
+        {{ fileForm.get('fileName')?.value || 'File name' }}
+      </div>
+    </div>
+
+    <form [formGroup]="fileForm" (ngSubmit)="addOrUpdateFile()" class="form-fields" novalidate>
+      <label>
+        File Name
+        <input type="text" formControlName="fileName" />
+      </label>
+
+      <label>
+        Attach file
+        <input type="file" (change)="onFileSelected($event)" />
+        <div class="error" *ngIf="fileError">{{ fileError }}</div>
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">
+          {{ editingIndex !== null ? 'Save changes' : 'Add file' }}
+        </button>
+        <button type="button" class="btn" (click)="toggleForm(null)">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- FILE LIST + DETAILS -->
+  <div class="documents-grid" *ngIf="!showForm">
+    <div class="doc-wrapper" *ngFor="let doc of filteredDocuments(); let i = index">
+      <div class="doc-btn" (click)="toggleDetails(doc)">
+        <div class="doc-icon">📄</div>
+        <div class="doc-name">{{ doc.fileName }}</div>
+
+        <!-- Three-dot menu -->
+        <div class="doc-menu">
+          <button (click)="toggleMenu(i)">⋮</button>
+          <div class="menu-options" [class.show]="menuOpenIndex === i">
+            <button (click)="editDocument(i)">Edit</button>
+            <button (click)="deleteDocument(i)">Delete</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="file-details" *ngIf="selectedFile === doc">
+        <h3>File Details</h3>
+        <p><strong>Name:</strong> {{ selectedFile.fileName }}</p>
+        <p><strong>Extension:</strong> {{ selectedFile.fileType }}</p>
+        <p><strong>Date Added:</strong> {{ selectedFile.dateAdded }}</p>
+        <p>
+          <strong>Size:</strong> {{ ((selectedFile.size ?? 0) / 1024).toFixed(2) }} KB
+        </p>
+
+        <div *ngIf="selectedFile?.fileData && selectedFile.fileType as fileType">
+          <div *ngIf="fileType.startsWith('.jpg') || fileType.startsWith('.png')">
+            <strong>Preview:</strong>
+            <img [src]="getPreviewSrc()"
+                 alt="Preview"
+                 class="file-preview-img"/>
+          </div>
+        </div>
+
+        <button (click)="selectedFile = null">X Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add new doc-->
+  <div class="add-document" *ngIf="!showForm">
+    <button (click)="addDocument()">➕ Add Document</button>
+  </div>
+</div>
+

@@ -1,0 +1,108 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.pin-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #CEB0B2;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: rgba(0, 0, 0, 0.58);
+}
+
+.top-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.bottom-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.logo {
+  width: 30vh;
+  max-width: 500px;
+  margin-bottom: 0;
+  display: block;
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  text-align: center;
+}
+
+.pin-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+
+  span {
+    width: 3vh;
+    height: 3vh;
+    margin: 0 8px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.68);
+    transition: background 0.2s;
+
+    &.filled {
+      background: rgba(97, 43, 52, 0.42);
+      border-color: rgba(177, 95, 108, 0.7);
+    }
+  }
+}
+
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(9vh, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.pin-pad button {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  font-size: 3rem;
+  border-radius: 50%;
+  border: 1px solid #8c496f;
+  font-weight: bold;
+  background: linear-gradient(145deg, #efb1b9, #ae7981);
+  box-shadow:
+    2px 2px 4px rgba(0,0,0,0.25),
+    -2px -2px 4px rgba(255,255,255,0.6);
+
+  transition: all 0.6s ease-in-out;
+
+}
+
+.pin-pad button:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 2px 2px 4px rgba(0,0,0,0.3),
+    inset -2px -2px 4px rgba(255,255,255,0.5);
+  background: linear-gradient(145deg, #bc7e87, #e15b71);
+}
+
+.pin-pad .delete-btn {
+  border-radius: 50px;
+  aspect-ratio: auto;
+  padding: 10px;
+  font-size: 1.2rem;
+  background: transparent;
+  border: none;
+  grid-column: 3;
+}

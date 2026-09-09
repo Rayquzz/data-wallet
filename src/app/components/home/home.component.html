@@ -1,0 +1,47 @@
+<p-drawer [(visible)]="visible" position="left" [style]="{width: '220px', bottom: '0', top: 'auto'}">
+  <div class="nav-container">
+    <ul class="nav">
+      <li *ngFor="let item of items">
+        <a [routerLink]="item.routerLink" (click)="visible = false">
+          <i [class]="'pi ' + item.icon"></i>
+          <span class="text">{{ item.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</p-drawer>
+
+<div class="header">
+  <button class="open-menu-btn" (click)="visible = true">
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <button class="logo" routerLink="/home">
+    <img src="assets/main-logo.png" alt="DataWallet" class="logo-img"/>
+  </button>
+
+  <div class="spacer"></div>
+
+  <div class="profile-menu-container">
+    <img class="user-avatar" src="assets/account.jpg" alt="User"
+         (click)="showProfileMenu = !showProfileMenu"/>
+    <div *ngIf="showProfileMenu" class="profile-dropdown">
+      <p-menu [model]="profileMenuItems" (click)="onClickProfileMenu($event)"></p-menu>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="welcome">
+    Welcome back
+  </div>
+  <router-outlet #childOutlet="outlet"></router-outlet>
+</div>
+
+<div class="add-item-container" *ngIf="showAddItemButtons">
+  <div class="add-item-container">
+    <button class="add-btn" (click)="addFile()">Add File</button>
+    <button class="add-btn" (click)="addPassword()">Add Password</button>
+    <button class="add-btn" (click)="addCard()">Add Card</button>
+  </div>
+</div>

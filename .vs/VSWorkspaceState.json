@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.angular",
+    "\\.angular\\cache",
+    "\\.angular\\cache\\20.2.1",
+    "\\.angular\\cache\\20.2.1\\data-wallet",
+    "\\.angular\\cache\\20.2.1\\data-wallet\\vite",
+    "\\.angular\\cache\\20.2.1\\data-wallet\\vite\\deps",
+    "\\public"
+  ],
+  "SelectedNode": "\\package.json",
+  "PreviewInSolutionExplorer": false
+}

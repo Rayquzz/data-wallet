@@ -1,0 +1,160 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  background: #CEB0B2; /* culoarea ta principală */
+  padding: 40px 16px;
+  box-sizing: border-box;
+}
+
+/* Container – totul pe coloană, centrat */
+.page-container {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Logo placeholder (înlocuiește cu <img> când ai) */
+.logo-placeholder {
+  width: 140px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  /* aspect vizual pentru placeholder; dacă vei folosi <img>, elimină background */
+  background: rgba(255,255,255,0.03);
+  color: #7B2E3A;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* CUTIILE: fundal combinat cu host (transparent), bordură cerută */
+.info-box,
+.actions-box {
+  width: 100%;
+  background: transparent; /* se vede culoarea host-ului */
+  border: 2px solid #7B2E3A;
+  border-radius: 12px;
+  padding: 22px;
+  box-sizing: border-box;
+  /* opțional: mic shadow dar dacă vrei curat, comentează */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* Titlu din cutia info (mai mare și centrat) */
+.info-box h1 {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 22px; /* mai mare */
+  line-height: 1.1;
+  color: #3a2a2a;
+  font-weight: 700;
+}
+
+/* Paragraf descriptiv, centrat */
+.info-box .lead {
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  color: #3f3f3f;
+}
+
+/* Textul de deasupra butoanelor, mai mare si centrat */
+.actions-box .choose-text {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 16px;
+  color: #3a2a2a;
+  font-weight: 600;
+}
+
+/* Coloană de butoane: butoanele centrate, mari și jos (poți controla margin-bottom) */
+.buttons-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+  padding-bottom: 6px; /* le coboară puțin în interiorul cutiei */
+}
+
+/* Butoane mari și de culoarea cerută */
+.btn {
+  width: 100%;
+  max-width: 320px;   /* limitează lățimea butoanelor pe ecrane mari */
+  padding: 14px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #7B2E3A; /* culoarea cerută */
+  color: #ffffff;
+  box-shadow: 0 6px 12px rgba(123,46,58,0.18);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* Hover / active pentru buton */
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 18px rgba(123,46,58,0.22); }
+.btn:active { transform: translateY(0); }
+
+/* "sau" între butoane */
+.or {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #3a2a2a;
+  text-transform: lowercase;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* RESPONSIVE: pe ecrane mari vrem spacing mai generos */
+@media (min-width: 800px) {
+  :host { padding-top: 60px; }
+  .page-container { gap: 28px; }
+  .info-box h1 { font-size: 24px; }
+  .btn { max-width: 360px; }
+}
+.card {
+    text-align: center;
+    border: 2px solid #7B2E3A;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #d8b3b3; /* aceeași ca fundalul */
+    margin: 20px;
+}
+
+.card h2 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #2d2d2d;
+}
+
+.btn {
+    display: block;
+    width: 80%;
+    margin: 15px auto;
+    padding: 15px;
+    background-color: #7B2E3A;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #5c202a;
+}
+
+.sau {
+    font-weight: bold;
+    margin: 10px 0;
+}
+

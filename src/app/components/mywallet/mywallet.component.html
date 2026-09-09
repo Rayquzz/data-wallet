@@ -1,0 +1,65 @@
+<div class="wallet-container">
+  <h2 class="wallet-title">Balance: {{balance}} $MAS</h2>
+
+  <!-- Toast notification -->
+  <div class="toast" [class.show]="showToast">
+    {{ toastMessage }}
+  </div>
+
+  <!-- Address -->
+  <div class="wallet-card">
+    <p class="wallet-label">Address</p>
+    <div class="wallet-content">
+      <span class="wallet-text">
+        {{ address }}
+      </span>
+      <div class="wallet-actions">
+        <i
+          class="pi pi-copy"
+          (click)="copyToClipboard(address, 'Address')"
+          title="Copy Address"
+        ></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Public Key -->
+  <div class="wallet-card">
+    <p class="wallet-label">Public Key</p>
+    <div class="wallet-content">
+      <span class="wallet-text">
+        {{ publicKey }}
+      </span>
+      <div class="wallet-actions">
+        <i
+          class="pi pi-copy"
+          (click)="copyToClipboard(publicKey, 'Public Key')"
+          title="Copy Public Key"
+        ></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Private Key -->
+  <div class="wallet-card">
+    <p class="wallet-label">Private Key</p>
+    <div class="wallet-content">
+      <span class="wallet-text">
+        {{ showPrivate ? privateKey : hiddenPrivate }}
+      </span>
+      <div class="wallet-actions">
+        <i
+          class="pi pi-copy"
+          (click)="copyToClipboard(privateKey, 'Private Key')"
+          title="Copy Private Key"
+        ></i>
+        <i
+          class="pi"
+          [ngClass]="showPrivate ? 'pi-eye' : 'pi-eye-slash'"
+          (click)="toggle('private')"
+          [title]="showPrivate ? 'Hide Private Key' : 'Show Private Key'"
+        ></i>
+      </div>
+    </div>
+  </div>
+</div>

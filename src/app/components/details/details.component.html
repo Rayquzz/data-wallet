@@ -1,0 +1,98 @@
+<p-drawer [(visible)]="visible" position="left" [style]="{width: '220px', bottom: '0', top: 'auto'}">
+  <div class="nav-container">
+  <ul class="nav">
+  <li>
+    <a href="#">
+      <i class="pi pi-key"></i>
+      <span class="text"> Passwords</span>
+    </a>
+  </li>
+      <li>
+    <a href="#">
+      <i class="pi pi-credit-card"></i>
+      <span class="text"> Cards</span>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="pi pi-file"></i>
+      <span class="text"> Files</span>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="pi pi-star"></i>
+      <span class="text"> Favorites</span>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="pi pi-cog"></i>
+      <span class="text"> Settings</span>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="pi pi-trash"></i>
+      <span class="text"> Trash</span>
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      <i class="pi pi-calendar"></i>
+      <span class="text"> Q&A</span>
+    </a>
+  </li>
+</ul>
+
+</div>
+  <!-- <p-menu [model]="items" (click)="visible = false"></p-menu> -->
+</p-drawer>
+
+<div class="header">
+  <button class="open-menu-btn" (click)="visible = true">
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <button class="logo" routerLink="/home">
+    <img src="assets/logo.png" alt="DataWallet" class="logo-img" />
+  </button>
+
+  <div class="spacer"></div>
+
+  <div class="profile-menu-container">
+    <img class="user-avatar" src="assets/account.jpg" alt="User"
+         (click)="showProfileMenu = !showProfileMenu" />
+    <div *ngIf="showProfileMenu" class="profile-dropdown">
+      <p-menu [model]="profileMenuItems"></p-menu>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="contact-container">
+	<form id="form">
+    	<h3>Name of the company</h3>
+		<div class="wrapper">
+			<input type="text" placeholder="Your name"/>
+			<div class="gradient-bg"></div>
+		</div>
+    <h3>Your name/email</h3>
+		<div class="wrapper">
+			<input type="email" placeholder="Email address" />
+			<div class="gradient-bg"></div>
+		</div>
+    <h3>Password</h3>
+		<div class="wrapper">
+			<input type="text" placeholder="Password">
+			<div class="gradient-bg"></div>
+		</div>
+    <h3>Note</h3>
+		<div class="wrapper wrapper-big">
+			<textarea placeholder="Message"></textarea>
+			<div class="gradient-bg"></div>
+		</div>
+		<button>Add</button>
+	</form>
+</div>
+</div>

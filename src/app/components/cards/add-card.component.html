@@ -1,0 +1,173 @@
+<div class="cards-page">
+  <h1>Carduri</h1>
+
+  <!-- Loading indicator -->
+<div *ngIf="showLoading" class="loading-indicator">
+  <div class="loader"></div>
+</div>
+
+  <button class="btn primary" (click)="addCard()" [disabled]="showLoading">
+    Adaugă card nou
+  </button>
+
+  <!-- FORMULAR -->
+  <div class="card-form-wrapper" *ngIf="showForm">
+    <div class="card-preview">
+      <div class="card-header">
+        <div class="chip"></div>
+        <div class="card-type-display">
+          {{ getCardTypeLabel(cardForm.get('type')?.value || '') }}
+        </div>
+      </div>
+      <div class="card-number">
+        {{ formatCardNumberForDisplay(cardForm.get('cardNumber')?.value, cardForm.get('cardNumber')?.value && cardForm.get('cardNumber')?.value.length === 16) }}
+      </div>
+      <div class="card-name">
+        {{ (cardForm.get('firstName')?.value || 'Prenume') + ' ' + (cardForm.get('lastName')?.value || 'Nume') }}
+      </div>
+      <div class="card-footer">
+        <div class="expiry">Exp: {{ cardForm.get('expiryMonth')?.value || 'MM' }}/{{ cardForm.get('expiryYear')?.value || 'YYYY' }}</div>
+        <div class="cvv">CVV: ***</div>
+      </div>
+    </div>
+
+    <form [formGroup]="cardForm" (ngSubmit)="saveCard()" class="form-fields" novalidate>
+      <label>
+        Prenume
+        <input type="text" formControlName="firstName" />
+        <div class="error" *ngIf="cardForm.get('firstName')?.touched && cardForm.get('firstName')?.invalid">
+          Prenumele este obligatoriu.
+        </div>
+      </label>
+
+      <label>
+        Nume
+        <input type="text" formControlName="lastName" />
+        <div class="error" *ngIf="cardForm.get('lastName')?.touched && cardForm.get('lastName')?.invalid">
+          Numele este obligatoriu.
+        </div>
+      </label>
+
+      <label>
+        Tipul cardului
+        <select formControlName="type">
+          <option value="">Selectează tipul cardului</option>
+          <option *ngFor="let cardType of cardTypes" [value]="cardType.value">
+            {{ cardType.label }}
+          </option>
+        </select>
+        <div class="error" *ngIf="cardForm.get('type')?.touched && cardForm.get('type')?.invalid">
+          Tipul cardului este obligatoriu.
+        </div>
+      </label>
+
+      <label>
+        Număr card
+        <input type="text" maxlength="19" placeholder="1234 5678 9012 3456"
+               (input)="onCardNumberInput($event)" [value]="getCardNumberInputValue() || ''" />
+        <div class="error" *ngIf="cardForm.get('cardNumber')?.touched && cardForm.get('cardNumber')?.invalid">
+          Număr card invalid (trebuie 16 cifre).
+        </div>
+      </label>
+
+      <div class="row">
+        <label>
+          Lună expirare
+          <select formControlName="expiryMonth">
+            <option value="">MM</option>
+            <option *ngFor="let m of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="m">{{ m < 10 ? ('0' + m) : m }}</option>
+          </select>
+        </label>
+
+        <label>
+          An expirare
+          <select formControlName="expiryYear">
+            <option value="">YYYY</option>
+            <option *ngFor="let y of [].constructor(21); let i = index" [value]="currentYear + i">{{ currentYear + i }}</option>
+          </select>
+        </label>
+      </div>
+
+      <label>
+        CVV
+        <input type="password" formControlName="cvv" maxlength="3" />
+        <div class="error" *ngIf="cardForm.get('cvv')?.touched && cardForm.get('cvv')?.invalid">
+          CVV invalid (3 cifre).
+        </div>
+      </label>
+
+      <label>
+        PIN
+        <input type="password" formControlName="pin" maxlength="4" />
+        <div class="error" *ngIf="cardForm.get('pin')?.touched && cardForm.get('pin')?.invalid">
+          PIN invalid (4 cifre).
+        </div>
+      </label>
+
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="btn primary"
+          [disabled]="showLoading">
+          {{ editingIndex !== null ? 'Salvează modificările' : 'Adaugă card' }}
+        </button>
+        <button 
+          type="button" 
+          class="btn" 
+          (click)="cancelEdit()"
+          [disabled]="showLoading">
+          Anulează
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- LISTĂ DE CARDURI -->
+  <div class="cards-list">
+    <div class="card-item" *ngFor="let card of cards; let i = index">
+      <div class="card-visual">
+        <div class="card-header">
+          <div class="chip"></div>
+          <div class="card-type-info">
+            <span class="card-type-label">{{ getCardTypeLabel(card.cardType || '') }}</span>
+          </div>
+        </div>
+        <div class="card-number">
+          <span (click)="toggleShowNumber(card)" class="clickable">
+            {{ card.showNumber ? formatCardNumberForDisplay(card.cardNumber, true) : formatCardNumberForDisplay(card.cardNumber) }}
+          </span>
+        </div>
+        <div class="card-name">{{ card.firstName }} {{ card.lastName }}</div>
+        <div class="card-footer">
+          <div>Exp: {{ card.expiryMonth | number:'2.0' }}/{{ card.expiryYear }}</div>
+          <div>
+            CVV:
+            <span class="sensitive" (click)="toggleShowCvv(card)">{{ card.showCvv ? card.cvv : '***' }}</span>
+            &nbsp;|&nbsp;
+            PIN:
+            <span class="sensitive" (click)="toggleShowPin(card)">{{ card.showPin ? card.pin : '****' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button 
+          class="btn" 
+          (click)="editCard(i)"
+          [disabled]="showLoading">
+          Editează
+        </button>
+        <button 
+          class="btn danger" 
+          (click)="deleteCard(i)"
+          [disabled]="showLoading">
+          Șterge
+        </button>
+      </div>
+    </div>
+
+    <div class="no-cards" *ngIf="cards.length === 0 && !showLoading">
+      Nu există carduri adăugate.
+    </div>
+  </div>
+</div>
